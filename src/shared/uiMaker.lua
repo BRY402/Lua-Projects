@@ -20,7 +20,6 @@ local UI = {new = function(type_, data)
     local UI = lib.Create(type_)
     local uiMeta = setmetatable({
         ID = HttpService:GenerateGUID()
-        
     })
 end}
 return UI
