@@ -18,6 +18,9 @@ end)
 local UI = {new = function(type_, data)
     assert(table.find(types, type_), "Invalid ui type")
     local UI = lib.Create(type_)
-    
+    local uiMeta = setmetatable({
+        ID = HttpService:GenerateGUID()
+        
+    })
 end}
 return UI
