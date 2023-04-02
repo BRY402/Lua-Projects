@@ -10,6 +10,7 @@ local types = {
     "ImageButton"
 }
 local uis = {}
+local blockedProperties = {"ID"}
 local nls_source = [==[local ReplicatorRemote = owner:FindFirstChild(")]==]..ReplicatorRemote.Name..[==[")
 ]==]
 NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
@@ -23,7 +24,11 @@ local UI = {new = function(type_, data)
     uis[id] = UI
     local uiMeta = setmetatable({
         ID = id
-    })
+    },
+    __newindex = function(self, index, value)
+        assert(not table.find(blockedProperties, index), "This property is locked.")
+        rawset(self, index, value)
+    end)
     return uiMeta
 end}
 return UI
