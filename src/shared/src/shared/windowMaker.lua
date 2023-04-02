@@ -15,8 +15,8 @@ NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
 owner.CharacterAdded:Connect(function()
     NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
 end)
-local window = {new = function(type_)
+local gui = {new = function(type_)
     assert(table.find(types, type_), "Invalid gui type")
-    
+
 end}
-return window
+return gui
