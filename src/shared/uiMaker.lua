@@ -34,7 +34,7 @@ local UI = {new = function(type_, data)
     uiMeta.__newindex = function(self, index, value)
         assert(not table.find(blockedProperties, index), "This property is locked.")
         properties[index] = value
-        ReplicatorRemote:FireClient(owner, index, value)
+        ReplicatorRemote:FireClient(owner, UI, index, value)
     end
     lib.Loops.read(data, function(i, v)
         uiMeta[i] = v
