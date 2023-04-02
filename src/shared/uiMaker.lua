@@ -9,6 +9,7 @@ local types = {
     "ImageLabel",
     "ImageButton"
 }
+local uis = {}
 local nls_source = [==[local ReplicatorRemote = owner:FindFirstChild(")]==]..ReplicatorRemote.Name..[==[")
 ]==]
 NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
@@ -18,8 +19,11 @@ end)
 local UI = {new = function(type_, data)
     assert(table.find(types, type_), "Invalid ui type")
     local UI = lib.Create(type_)
+    local id = HttpService:GenerateGUID()
+    uis[id] = UI
     local uiMeta = setmetatable({
-        ID = HttpService:GenerateGUID()
+        ID = id
     })
+    return uiMeta
 end}
 return UI
