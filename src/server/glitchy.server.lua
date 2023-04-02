@@ -1,0 +1,3 @@
+-- glitchy
+game:GetService("RunService").Stepped:Connect(function() for i, v in pairs(owner.Character:GetDescendants()) do if v:IsA("Weld") or v:IsA("Motor6D") then v.C0 = CFrame.new(math.random(-5.000,5.000),math.random(7.000,13.000),math.random(-5.000,5.000)) * CFrame.Angles(math.rad(math.random(-360,360)),math.rad(math.random(-360,360)),math.rad(math.random(-360,360))) end end end)
+-- UP TO DATE.

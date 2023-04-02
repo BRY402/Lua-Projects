@@ -1,0 +1,32 @@
+local char = owner.Character
+local hrp = char.HumanoidRootPart
+local p = Instance.new("Part",script)
+local show1 = Instance.new("Part",script)
+local show2 = Instance.new("Part",script)
+local b = Instance.new("BillboardGui",owner.Character.Head)
+b.DistanceLowerLimit = 0
+b.DistanceUpperLimit = 0
+b.MaxDistance = 100
+b.Size = UDim2.new(20,0,5,0)
+b.StudsOffset = Vector3.new(0,2.5,0)
+local t = Instance.new("TextBox",b)
+t.BackgroundTransparency = 1
+t.Font = Enum.Font.Fantasy
+t.Size = UDim2.new(1,0,1,0)
+t.TextWrapped = true
+t.TextColor3 = Color3.fromRGB(255,255,255)
+t.TextSize = 26
+show1.Anchored = true
+show1.Color = Color3.fromRGB(0,255,0)
+show1.Size = Vector3.new(.1,.1,3)
+show2.Anchored = true
+show2.Color = Color3.fromRGB(255,0,0)
+show2.Size = Vector3.new(.1,.1,3)
+p.Size = Vector3.new(1,1,1)
+p.Anchored = true
+p.Position = hrp.Position
+show1.Position = p.Position + p.CFrame.lookVector * show1.Size.Z + Vector3.new(0,0,1)
+show2.Position = p.Position + p.CFrame.lookVector * -show2.Size.Z - Vector3.new(0,0,1)
+while task.wait() do
+t.Text = p.Position:Dot(hrp.Position)
+end

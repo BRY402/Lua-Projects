@@ -1,0 +1,4 @@
+-- box
+local d = game:GetService("Debris")
+local t = {} local p = Instance.new("Part",script) p.Size = Vector3.new(6,6,6) p.Position = owner.Character.Torso.Position local z = Instance.new("Part") z.Size = p.Size - Vector3.new(1.5,0,1.5) table.insert(t,z) z.Parent = script z.Position = p.Position + Vector3.new(0,1.5,0) p.BrickColor = BrickColor.new("Brown") z.Anchored = true z.CanCollide = false p.CanCollide = false p.Anchored = true p.Transparency = .5 local c = p:SubtractAsync(t,PreciseConvexDecomposition) d:AddItem(z,0) d:AddItem(p,0) c.Parent = script c.Material = "Wood" c.Transparency = 0 c.Anchored = false c.Position = owner.Character.Torso.Position c.CanCollide = true c:SetNetworkOwner(owner)
+-- UP TO DATE.
