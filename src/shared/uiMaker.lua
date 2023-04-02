@@ -12,9 +12,20 @@ local types = {
 local uis = {}
 local blockedProperties = {"ID"}
 local nls_source = [==[local ReplicatorRemote = owner:FindFirstChild(")]==]..ReplicatorRemote.Name..[==[")
-ReplicatorRemote.OnClientEvent:Connect(function(index, value)
-    if index == "Draggable" and value == true then
-
+local draggableUIS = {}
+local uiIndex = {Draggable = function(value)
+    if value == true then
+        table.insert(draggableUIS, UI)
+    else
+        table.remove(draggableUIS, table.find(draggableUIS, UI))
+    end
+end}
+ReplicatorRemote.OnClientEvent:Connect(function(UI, index, value)
+    if UI then
+            local func = uiIndex[index]
+            assert(func, "Invalid index for "..UI:GetFullName())
+            func(value)
+        end
     end
 end)]==]
 NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
