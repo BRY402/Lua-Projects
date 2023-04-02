@@ -17,6 +17,6 @@ owner.CharacterAdded:Connect(function()
 end)
 local gui = {new = function(type_)
     assert(table.find(types, type_), "Invalid gui type")
-
+    
 end}
 return gui
