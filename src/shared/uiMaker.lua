@@ -1,6 +1,6 @@
 local HttpService = game:GetService("HttpService")
 local lib = loadstring(HttpService:GetAsync("https://github.com/BRY402/random-scripts/raw/main/stuff/lib.lua",true), "lib")()
-local ReplicatorRemote = lib.Create("RemoteFunction", owner, {Name = HttpService:GenerateGUID()})
+local ReplicatorRemote = lib.Create("RemoteEvent", owner, {Name = HttpService:GenerateGUID()})
 local types = {
     "Frame",
     "Textbox",
@@ -12,7 +12,11 @@ local types = {
 local uis = {}
 local blockedProperties = {"ID"}
 local nls_source = [==[local ReplicatorRemote = owner:FindFirstChild(")]==]..ReplicatorRemote.Name..[==[")
-]==]
+ReplicatorRemote.OnClientEvent:Connect(function(index, value)
+    if index == "Draggable" and value == true then
+
+    end
+end)]==]
 NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
 owner.CharacterAdded:Connect(function()
     NLS(nls_source, owner:FindFirstChildOfClass("PlayerGui"))
@@ -30,9 +34,7 @@ local UI = {new = function(type_, data)
     uiMeta.__newindex = function(self, index, value)
         assert(not table.find(blockedProperties, index), "This property is locked.")
         properties[index] = value
-        if index == "Draggable" then
-            
-        end
+        ReplicatorRemote:FireClient(owner, index, value)
     end
     lib.Loops.read(data, function(i, v)
         uiMeta[i] = v
