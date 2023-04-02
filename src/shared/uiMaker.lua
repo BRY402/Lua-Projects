@@ -30,6 +30,9 @@ local UI = {new = function(type_, data)
     uiMeta.__newindex = function(self, index, value)
         assert(not table.find(blockedProperties, index), "This property is locked.")
         properties[index] = value
+        if index == "Draggable" then
+            
+        end
     end
     lib.Loops.read(data, function(i, v)
         uiMeta[i] = v
