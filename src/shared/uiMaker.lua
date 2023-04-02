@@ -22,12 +22,17 @@ local UI = {new = function(type_, data)
     local UI = lib.Create(type_)
     local id = HttpService:GenerateGUID()
     uis[id] = UI
-    local uiMeta = setmetatable({
-        ID = id
-    },
-    __newindex = function(self, index, value)
+    local uiMeta = getmetatable(newproxy(true))
+    local properties = {ID = id}
+    uiMeta.__index = function(self, index)
+        return properties[index]
+    end
+    uiMeta.__newindex = function(self, index, value)
         assert(not table.find(blockedProperties, index), "This property is locked.")
-        rawset(self, index, value)
+        properties[index] = value
+    end
+    lib.Loops.read(data, function(i, v)
+        uiMeta[i] = v
     end)
     return uiMeta
 end}
