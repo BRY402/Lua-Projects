@@ -11,7 +11,8 @@ local types = {
 }
 local uis = {}
 local blockedProperties = {"ID"}
-local nls_source = [==[local ReplicatorRemote = owner:FindFirstChild(")]==]..ReplicatorRemote.Name..[==[")
+local nls_source = [==[local UserInputService = game:GetService("UserInputService")
+local ReplicatorRemote = owner:FindFirstChild(")]==]..ReplicatorRemote.Name..[==[")
 local draggableUIS = {}
 local uiIndex = {Draggable = function(value)
     if value == true then
