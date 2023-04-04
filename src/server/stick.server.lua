@@ -10,12 +10,11 @@ RunService.PreSimulation:Connect(function(delta)
 	local Camera = workspace.CurrentCamera
 	if Character then
 		local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-		Character.PrimaryPart = HumanoidRootPart
 		if HumanoidRootPart then
 			if lastPart then
 				local currentCFrame = lastPart.CFrame
 				local difference = currentCFrame:Inverse() * lastCFrame
-				Character:PivotTo(difference:ToObjectSpace(HumanoidRootPart.CFrame):ToWorldSpace(difference))
+				HumanoidRootPart.CFrame = difference:ToObjectSpace(HumanoidRootPart.CFrame)
 				if Camera then
 					Camera.CFrame = difference.Rotation:ToObjectSpace(Camera.CFrame)
 				end
