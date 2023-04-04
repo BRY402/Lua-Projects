@@ -15,9 +15,9 @@ RunService.PreSimulation:Connect(function(delta)
 			if lastPart then
 				local currentCFrame = lastPart.CFrame
 				local difference = currentCFrame:Inverse() * lastCFrame
-				Character:PivotTo(difference:ToObjectSpace(HumanoidRootPart.CFrame))
+				Character:PivotTo(HumanoidRootPart.CFrame * difference)
 				if Camera then
-					Camera.CFrame = difference.Rotation:ToObjectSpace(Camera.CFrame)
+					Camera.CFrame = Camera.CFrame * difference.Rotation
 				end
 			end
 			local result = workspace:Raycast(HumanoidRootPart.Position, Vector3.new(0, -15, 0), params)
