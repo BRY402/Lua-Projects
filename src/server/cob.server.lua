@@ -68,9 +68,8 @@ local function ChatMessage(msg)
 		local box = lib.Create("TextBox",gui,{
 				Text = "",
 				TextYAlignment = "Bottom",
-				Size = UDim2.new(1, 0, 1, 0),
-                TextWrapped = true,
-				TextSize = 16,
+				Size = UDim2.new(2, 0, 2, 0),
+                TextScaled = true,
 				BackgroundTransparency = 1,
 				TextColor3 = Color3.new(1,1,1)
 			})
@@ -81,7 +80,7 @@ local function ChatMessage(msg)
 		end
 		task.wait(.175)
 		sound:Stop()
-		lib.Destroy(gui, 5)
+		lib.Destroy(gui, 10)
 	end)
 end
 ChatMessage("Hello, my name is ".."Cob"..".")
