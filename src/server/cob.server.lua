@@ -3,7 +3,7 @@ local Players = game:GetService("Players")
 local lib = loadstring(HttpService:GetAsync("https://github.com/BRY402/random-scripts/raw/main/stuff/lib.lua",true))()
 local carter = loadstring(HttpService:GetAsync("https://github.com/BRY402/random-scripts/raw/main/stuff/carter.lua",true))()
 local animate = loadstring(HttpService:GetAsync("https://glot.io/snippets/gfd1olk1x8/raw/main.lua"))()
-local Description = lib.Create("HumanoidDescription",nil,{
+local Description = lib.Create("HumanoidDescription", nil, {
 	HeadColor = Color3.new(1,1,1),
 	TorsoColor = Color3.new(1,1,1),
 	RightArmColor = Color3.new(1,1,1),
@@ -12,7 +12,8 @@ local Description = lib.Create("HumanoidDescription",nil,{
 	LeftLegColor = Color3.new(1,1,1)
 })
 local target = nil
-local replies = {"At your wish!",
+local replies = {
+    "At your wish!",
 	"Right here!",
 	"Hello.",
 	"Hi.",
@@ -21,11 +22,13 @@ local replies = {"At your wish!",
 	"Hello, there.",
 	"Here."
 }
-local goodbies = {"Bye.",
+local goodbies = {
+    "Bye.",
 	"See you later!",
 	"Goodbye.",
 	"Ok.",
-	"Until we meet again!"}
+	"Until we meet again!"
+}
 local Character = Players:CreateHumanoidModelFromDescription(Description,"R6")
 local Head = Character.Head
 local Humanoid = Character.Humanoid
