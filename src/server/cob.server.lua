@@ -29,7 +29,7 @@ local goodbies = {
 	"Ok.",
 	"Until we meet again!"
 }
-local Character = Players:CreateHumanoidModelFromDescription(Description,"R6")
+local Character = Players:CreateHumanoidModelFromDescription(Description, "R6")
 local Head = Character.Head
 local Humanoid = Character.Humanoid
 local HumanoidRootPart = Character.HumanoidRootPart
