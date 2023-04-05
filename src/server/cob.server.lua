@@ -61,14 +61,15 @@ local function ChatMessage(msg)
 		})
 		local gui = lib.Create("BillboardGui",Head,{
 			Name = "ChatGui",
-			Size = UDim2.new(7.5,0,1,0),
-			StudsOffset = Vector3.new(0,2.5,0),
+			Size = UDim2.new(7.5, 0, 1, 0),
+			StudsOffset = Vector3.new(0, 2.5, 0),
 			MaxDistance = 50,
 		})
 		local box = lib.Create("TextBox",gui,{
 				Text = "",
 				TextYAlignment = "Bottom",
-				Size = UDim2.new(1,0,1,0),
+				Size = UDim2.new(1, 0, 1, 0),
+                TextWrapped = true,
 				TextSize = 16,
 				BackgroundTransparency = 1,
 				TextColor3 = Color3.new(1,1,1)
