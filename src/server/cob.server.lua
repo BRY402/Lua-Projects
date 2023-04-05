@@ -80,7 +80,7 @@ local function ChatMessage(msg)
 		end
 		task.wait(.175)
 		sound:Stop()
-		lib.Destroy(gui,5)
+		lib.Destroy(gui, 5)
 	end)
 end
 ChatMessage("Hello, my name is ".."Cob"..".")
