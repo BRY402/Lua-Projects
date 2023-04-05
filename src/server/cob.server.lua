@@ -84,6 +84,7 @@ local function ChatMessage(msg)
 	end)
 end
 ChatMessage("Hello, my name is ".."Cob"..".")
+--Vb2wFaDMnH22st9dvhcyA7q3UFbQ4gEZ", "V0"
 local bot = carter.new("518b1857-c5a9-41e7-8bf7-f428776c5cab", "V1")
 local function Chatted(msg,plr)
 	local PlayerChar = plr.Character
