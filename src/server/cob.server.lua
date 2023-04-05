@@ -71,7 +71,7 @@ local function ChatMessage(msg)
 				Size = UDim2.new(2, 0, 2, 0),
                 TextScaled = true,
 				BackgroundTransparency = 1,
-				TextColor3 = Color3.new(1,1,1)
+				TextColor3 = Color3.new(.5, 0, 1)
 			})
 		for i = 1,#msg do
 			box.Text = string.sub(msg,1,i)
