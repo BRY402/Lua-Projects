@@ -86,7 +86,7 @@ end
 ChatMessage("Hello, my name is ".."Cob"..".")
 --Vb2wFaDMnH22st9dvhcyA7q3UFbQ4gEZ", "V0"
 local bot = carter.new("518b1857-c5a9-41e7-8bf7-f428776c5cab", "V1")
-local function Chatted(msg,plr)
+local function Chatted(msg, plr)
 	local PlayerChar = plr.Character
 	if PlayerChar then
 		local PlayerHrp = PlayerChar:FindFirstChild("HumanoidRootPart")
@@ -101,7 +101,7 @@ local function Chatted(msg,plr)
 							target = nil
 							ChatMessage(goodbies[math.random(1,#goodbies)])
 						else
-							ChatMessage(bot:Send(plr.Name..": "..msg, plr))
+							ChatMessage(bot:Send("["..plr.Name.."]: "..msg, plr))
 						end
 					end
 				end
@@ -111,12 +111,12 @@ local function Chatted(msg,plr)
 end
 for i,v in pairs(Players:GetPlayers()) do
 	v.Chatted:Connect(function(msg)
-		Chatted(msg,v)
+		Chatted(msg, v)
 	end)
 end
 Players.PlayerAdded:Connect(function(plr)
 	plr.Chatted:Connect(function(msg)
-		Chatted(msg,plr)
+		Chatted(msg, plr)
 	end)
 end)
 lib.Utilities.fastSpawn(function()
