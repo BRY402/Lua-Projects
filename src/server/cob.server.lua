@@ -68,7 +68,7 @@ local function ChatMessage(msg)
 		local box = lib.Create("TextBox",gui,{
 			Text = "",
 			TextYAlignment = "Bottom",
-			Size = UDim2.new(2, 0, 2, 0),
+			Size = UDim2.new(1, 0, 1, 0),
             TextScaled = true,
 			BackgroundTransparency = 1,
 			TextColor3 = Color3.new(.5, 0, 1)
