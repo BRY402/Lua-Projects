@@ -61,7 +61,7 @@ local function ChatMessage(msg)
 		})
 		local gui = lib.Create("BillboardGui",Head,{
 			Name = "ChatGui",
-			Size = UDim2.new(7.5, 0, 1, 0),
+			Size = UDim2.new(10, 0, 1.25, 0),
 			StudsOffset = Vector3.new(0, 2.5, 0),
 			MaxDistance = 50,
 		})
