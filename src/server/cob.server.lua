@@ -66,13 +66,14 @@ local function ChatMessage(msg)
 			MaxDistance = 50,
 		})
 		local box = lib.Create("TextBox",gui,{
-				Text = "",
-				TextYAlignment = "Bottom",
-				Size = UDim2.new(2, 0, 2, 0),
-                TextScaled = true,
-				BackgroundTransparency = 1,
-				TextColor3 = Color3.new(.5, 0, 1)
-			})
+			Text = "",
+			TextYAlignment = "Bottom",
+			Size = UDim2.new(2, 0, 2, 0),
+			TextWrapped = true,
+            TextScaled = true,
+			BackgroundTransparency = 1,
+			TextColor3 = Color3.new(.5, 0, 1)
+		})
 		for i = 1,#msg do
 			box.Text = string.sub(msg,1,i)
 			sound:Play()
