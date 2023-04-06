@@ -69,7 +69,6 @@ local function ChatMessage(msg)
 			Text = "",
 			TextYAlignment = "Bottom",
 			Size = UDim2.new(2, 0, 2, 0),
-			TextWrapped = true,
             TextScaled = true,
 			BackgroundTransparency = 1,
 			TextColor3 = Color3.new(.5, 0, 1)
