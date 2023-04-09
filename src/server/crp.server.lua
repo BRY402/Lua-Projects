@@ -174,7 +174,6 @@ local CustomWorkspace = {
 local obj = Object.new()
 obj.Size = Vector3.new(5, 5, 5)
 obj.Position = Vector3.new(0, 30, 0)
-obj.RotVelocity = Vector3.new(0,1000,300)
 local obj2 = Object.new()
 obj2.Position = Vector3.new(0, .5, 0)
 obj2.Size = Vector3.new(25, 1, 25)
