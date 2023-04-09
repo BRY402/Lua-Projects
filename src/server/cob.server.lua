@@ -61,18 +61,18 @@ local function ChatMessage(msg)
 		})
 		local gui = lib.Create("BillboardGui",Head,{
 			Name = "ChatGui",
-			Size = UDim2.new(7.5, 0, 1, 0),
+			Size = UDim2.new(10, 0, 1.25, 0),
 			StudsOffset = Vector3.new(0, 2.5, 0),
 			MaxDistance = 50,
 		})
 		local box = lib.Create("TextBox",gui,{
-				Text = "",
-				TextYAlignment = "Bottom",
-				Size = UDim2.new(2, 0, 2, 0),
-                TextScaled = true,
-				BackgroundTransparency = 1,
-				TextColor3 = Color3.new(.5, 0, 1)
-			})
+			Text = "",
+			TextYAlignment = "Bottom",
+			Size = UDim2.new(1, 0, 1, 0),
+            TextScaled = true,
+			BackgroundTransparency = 1,
+			TextColor3 = Color3.new(.5, 0, 1)
+		})
 		for i = 1,#msg do
 			box.Text = string.sub(msg,1,i)
 			sound:Play()
