@@ -8,9 +8,9 @@ local PART_VisualHandler = lib.Create("Part",World,{
 	CanQuery = false,
 	Anchored = false
 })
-local DEFAULT_Gravity = 196.1999969482422
+local DEFAULT_GRAVITY = 196.1999969482422
 local Physics = {
-	Gravity = DEFAULT_Gravity
+	Gravity = DEFAULT_GRAVITY
 }
 local function newRegion(min, max)
 	local size = max + min
@@ -22,14 +22,13 @@ local function newRegion(min, max)
 	}
 end
 local function IsInBounds(Position1, Position2, Size)
-	local mag = (Position1 - Position2).Magnitude
-	local pos1 = Position1 - Size / 2
-	local pos2 = Position1 + Size / 2
-	return mag >= pos1.X and mag <= pos2.X and mag + 1 >= pos1.Y and mag - 1 <= pos2.Y and mag >= pos1.Z and mag <= pos2.Z
+	local positionMag = (Position1 - Position2).Magnitude
+	local sizeMag = (size / 2).Magnitude
+	return positionMag <= sizeMag
 end
 local Object = {Objects = {}}
 function Physics:SetGravity(Gravity)
-	self.Gravity = Gravity or DEFAULT_Gravity
+	self.Gravity = Gravity or DEFAULT_GRAVITY
 end
 function Physics:UpdateObjectCFrame(obj)
 	local X, Y, Z = obj.CFrame:ToOrientation()
@@ -38,7 +37,7 @@ function Physics:UpdateObjectCFrame(obj)
 	obj.Orientation = obj.Orientation + Vector3.new(obj.RotVelocity.X / 3, obj.RotVelocity.Y / 3, obj.RotVelocity.Z / 3)
 end
 function Physics:UpdateGravity(obj)
-	obj:ApplyForce(Vector3.yAxis * (Physics.Gravity / DEFAULT_Gravity) / 50)
+	obj:ApplyForce(Vector3.yAxis * (Physics.Gravity / DEFAULT_GRAVITY) / 50)
 end
 function Physics:GetPartsInBounds(bounds)
 	local inBounds = {}
