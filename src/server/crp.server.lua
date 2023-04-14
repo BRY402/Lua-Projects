@@ -1,7 +1,7 @@
 local HttpService = game:GetService("HttpService")
 local lib = loadstring(HttpService:GetAsync("https://github.com/BRY402/luau-scripts/raw/main/stuff/lib.lua",true))()
-local World = lib.Create("WorldModel",script)
-local PART_VisualHandler = lib.Create("Part",World,{
+local World = lib.Create("WorldModel", script)
+local PART_VisualHandler = lib.Create("Part", World, {
 	Size = Vector3.new(0,0,0),
 	Transparency = 1,
 	CanCollide = false,
@@ -23,7 +23,7 @@ local function newRegion(min, max)
 end
 local function IsInBounds(Position1, Position2, Size)
 	local positionMag = (Position1 - Position2).Magnitude
-	local sizeMag = (size / 2).Magnitude
+	local sizeMag = (Size / 2).Magnitude
 	return positionMag <= sizeMag
 end
 local Object = {Objects = {}}
@@ -44,11 +44,11 @@ function Physics:GetPartsInBounds(bounds)
 	lib.Loops.read(Object.Objects, function(index, value)
 		if value ~= bounds then
 			if bounds.ClassName == "Object" then
-				if IsInBounds(bounds.Position, value.Position, bounds.Size) and IsInBounds(value.Position, bounds.Position, value.Size) then
+				if IsInBounds(bounds.Position, value.Position, bounds.Size) then
 					table.insert(inBounds, value)
 				end
 			elseif not bounds.ClassName then
-				if IsInBounds(bounds.Position, value.Position, bounds.Size) and IsInBounds(value.Position, bounds.Position, value.Size) and not table.find(bounds.Filter, value) then
+				if IsInBounds(bounds.Position, value.Position, bounds.Size) and not table.find(bounds.Filter, value) then
 					table.insert(inBounds, value)
 				end
 			end
@@ -57,7 +57,7 @@ function Physics:GetPartsInBounds(bounds)
 	return inBounds
 end
 function Physics:IsColliding(Part1, Part2)
-	return IsInBounds(Part1.Position, Part2.Position, Part1.Size) and IsInBounds(Part2.Position, Part1.Position, Part2.Size)
+	return IsInBounds(Part1.Position, Part2.Position, Part1.Size)
 end
 function Physics:Raycast(startpos, endpos, ignorelist)
 	local unit = (startpos - endpos).Unit
@@ -82,13 +82,13 @@ function Physics:UpdateObject(obj)
 	obj.RotVelocity = obj.RotVelocity - obj.RotVelocity / Physics.Gravity
 	local collidingObjects = obj:GetCollidingObjects()
 	if #collidingObjects > 0 then
-		lib.Loops.read(collidingObjects, function(index, value)
+		--[[lib.Loops.read(collidingObjects, function(index, value)
 			local unit = (value.Position + obj.Position).Unit
 			local mag = (obj.Position - value.Position).Magnitude
 			obj.Position = obj.Position + unit * mag
 			obj.Velocity = Vector3.new(obj.Velocity.X, -math.abs(obj.Velocity.Y / 2), obj.Velocity.Z)
 			Physics:UpdateObjectCFrame(obj)
-		end)
+		end)]]
 	else
 		Physics:UpdateGravity(obj)
 		Physics:UpdateObjectCFrame(obj)
@@ -113,6 +113,7 @@ Object.new = function()
 		lib.Loops.read(Object.Objects, function(index, value)
 			if value ~= Part then
 				local isColliding = Physics:IsColliding(extra_proterties, value)
+				print(isColliding)
 				if isColliding then
 					table.insert(colliding, value)
 				end
@@ -163,9 +164,9 @@ Object.new = function()
 	return New
 end
 Object.NewRegion = newRegion
---test is not a valid member of Player "Players.BRY402"
-local YieldingFrame = lib.Utilities.newEvent("OnYield","Fire")
-local OnNextFrame = lib.Utilities.newEvent("Updated","NextFrame")
+--test is not a valid member of Object "FullName"
+local YieldingFrame = lib.Utilities.newEvent("OnYield")
+local OnNextFrame = lib.Utilities.newEvent("Updated", "NextFrame")
 local CustomWorkspace = {
 	YieldingFrame = YieldingFrame.OnYield,
 	OnNextFrame = OnNextFrame.Updated,

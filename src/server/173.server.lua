@@ -30,6 +30,7 @@ rs.Stepped:Connect(function()
 part.Anchored = true
 local high = math.huge
 for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+local hrp, pos, mag
 if v.Character and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health > 0 then
 hrp = v.Character.HumanoidRootPart
 pos = (hrp.Position - part.Position).Unit

@@ -185,7 +185,6 @@ part.Name == "Base" or part.Parent.Parent.Name == owner.Character.Name then
 else
 if part:IsA("Part") then
 game:GetService("Debris"):AddItem(part,0)
-warn("?!$°(₢9&"..math.random(1,10) math.random(1,10) math.random(1,10))
 end
 end
 end)
