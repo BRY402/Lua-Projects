@@ -1,6 +1,6 @@
 outputmsg("Network&gt; Joining network...")
-local MessagingService = Services.("MessagingService")
-local HttpService = Services.("HttpService")
+local MessagingService = Services.MessagingService
+local HttpService = Services.HttpService
 local encrypt = import("encrypt")
 local newEvent = import("lib").Utilities.newEvent
 local storage = {
@@ -60,7 +60,7 @@ local types_guest = {
                     encrypt(data.Author)
                     post(host, "SendMessage", encrypt.encrypt(msg), data.Password)
                 end,
-                Chatted = chatSignal.Chatted
+                Chatted = chatSignal.Chatted,
                 exec = function(source)
                     encrypt(data.Author)
                     post(host, "RunCode", encrypt.encrypt(source), data.Password)
