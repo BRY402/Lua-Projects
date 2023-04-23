@@ -6,8 +6,8 @@ local function ragdoll(character)
     local Humanoid = character:FindFirstChildOfClass("Humanoid")
     assert(Torso, "Missing Torso")
     if Humanoid then
-        Humanoid.RequiresNeck = true
-        Humanoid.PlatformStand = false
+        Humanoid.RequiresNeck = false
+        Humanoid.PlatformStand = true
     end
     local function replace(joint)
         local ball = lib.Create("BallSocketConstraint", script, {
@@ -41,8 +41,8 @@ local function unragdoll(character)
     local Humanoid = character:FindFirstChildOfClass("Humanoid")
     assert(Torso, "Missing Torso")
     if Humanoid then
-        Humanoid.RequiresNeck = false
-        Humanoid.PlatformStand = true
+        Humanoid.RequiresNeck = true
+        Humanoid.PlatformStand = false
     end
     local function getJoints(limb)
         lib.Loops.read(limb:GetJoints(), function(i, v)
