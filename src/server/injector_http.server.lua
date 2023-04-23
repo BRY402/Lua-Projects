@@ -1,5 +1,5 @@
 local HttpService = game:GetService("HttpService")
-local func, fail = loadstring(HttpService:GetAsync("https://gist.github.com/BRY402/b81f2790715c4b26686e4196e16fcfdb/raw"), "injector")
+local func, fail = loadstring(HttpService:GetAsync("https://gist.github.com/BRY402/4fcfd631cbb1bc33223172271e9167ce/raw"), "injector")
 if func then
 	func()
 else
