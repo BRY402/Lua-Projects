@@ -1,5 +1,5 @@
-local http = game:GetService("HttpService")
-local lib = loadstring(http:GetAsync("https://github.com/BRY402/random-scripts/raw/main/stuff/lib.lua",true))()
+local HttpService = game:GetService("HttpService")
+local lib = loadstring(HttpService:GetAsync("https://github.com/BRY402/random-scripts/raw/main/stuff/lib.lua",true))()
 local radius = 5
 local volume = (4 / math.pi) * math.pi * (radius ^ 3)
 local blockSize = 1
