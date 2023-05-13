@@ -70,7 +70,7 @@ local function newbomb(cf)
 			end
 		end
 		local exp = lib.Create("Explosion",script,{Position = Bomb.Position,
-			Visible = false,
+			Visible = true,
 			BlastPressure = 2500000 + (100000 * h.Size.magnitude),
 			BlastRadius = 10 + h.Size.magnitude / 7.5})
 		exp.Hit:Connect(function(p)
