@@ -101,7 +101,7 @@ local function Chatted(msg, plr)
 							target = nil
 							ChatMessage(goodbies[math.random(1,#goodbies)])
 						else
-							ChatMessage(bot:Send("["..plr.Name.."]: "..msg, plr))
+							ChatMessage(bot:Send("["..plr.Name.."]: "..msg))
 						end
 					end
 				end
