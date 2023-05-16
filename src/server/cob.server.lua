@@ -83,7 +83,7 @@ local function ChatMessage(msg)
 		lib.Destroy(gui, 10)
 	end)
 end
-ChatMessage("Hello, my name is ".."Cob"..".")
+ChatMessage("Hello, my name is Cob.")
 --Vb2wFaDMnH22st9dvhcyA7q3UFbQ4gEZ", "V0"
 local bot = carter.new("518b1857-c5a9-41e7-8bf7-f428776c5cab", "V1")
 local function Chatted(msg, plr)
@@ -119,22 +119,20 @@ Players.PlayerAdded:Connect(function(plr)
 		Chatted(msg, plr)
 	end)
 end)
-lib.Utilities.fastSpawn(function()
-	while task.wait() do
-		if target then
-			local PlayerChar = target.Character
-			if PlayerChar then
-				local PlayerHrp = PlayerChar:FindFirstChild("HumanoidRootPart")
-				if PlayerHrp then
-					local unit = (PlayerHrp.Position - HumanoidRootPart.Position).Unit
-					local mag = (PlayerHrp.Position - HumanoidRootPart.Position).Magnitude
-					Humanoid:MoveTo(PlayerHrp.Position - unit * 4)
-					if mag >= 2 and mag <= 5 then
-						local x, y, z = CFrame.lookAt(HumanoidRootPart.Position, PlayerHrp.Position).Rotation:ToOrientation()
-						HumanoidRootPart.CFrame = CFrame.new(HumanoidRootPart.Position) * HumanoidRootPart.CFrame.Rotation:Lerp(CFrame.Angles(0, y, 0), .65)
-					end
+while task.wait() do
+	if target then
+		local PlayerChar = target.Character
+		if PlayerChar then
+			local PlayerHrp = PlayerChar:FindFirstChild("HumanoidRootPart")
+			if PlayerHrp then
+				local unit = (PlayerHrp.Position - HumanoidRootPart.Position).Unit
+				local mag = (PlayerHrp.Position - HumanoidRootPart.Position).Magnitude
+				Humanoid:MoveTo(PlayerHrp.Position - unit * 4)
+				if mag >= 2 and mag <= 5 then
+					local x, y, z = CFrame.lookAt(HumanoidRootPart.Position, PlayerHrp.Position).Rotation:ToOrientation()
+					HumanoidRootPart.CFrame = CFrame.new(HumanoidRootPart.Position) * HumanoidRootPart.CFrame.Rotation:Lerp(CFrame.Angles(0, y, 0), .65)
 				end
 			end
 		end
 	end
-end)
+end
