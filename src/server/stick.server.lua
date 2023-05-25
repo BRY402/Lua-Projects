@@ -21,9 +21,6 @@ RunService.PreSimulation:Connect(function(delta)
 			end
 			local result = workspace:Raycast(HumanoidRootPart.Position, Vector3.new(0, -15, 0), params)
 			if result then
-				if lastPart ~= result.Instance then
-					lastCFrame = result.Instance.CFrame
-				end
 				lastPart = result.Instance
 				lastCFrame = lastPart.CFrame
 			else
@@ -52,8 +49,8 @@ part3.Parent = script
 local n = 0
 while true do
 	n = n + .25
-	part.CFrame = CFrame.new(-100, 0, 0) * CFrame.Angles(0, math.rad(n), 0)
-	part2.CFrame = CFrame.new(0, 0, 0) * CFrame.Angles(0, math.rad(n), 0)
-	part3.CFrame = CFrame.new(100, 0, 0) * CFrame.Angles(0, math.rad(n), 0)
+	part.CFrame = CFrame.new(-100, 2 + math.sin(os.clock()), 0) * CFrame.Angles(0, math.rad(n), 0)
+	part2.CFrame = CFrame.new(0, 2 + math.sin(os.clock()), 0) * CFrame.Angles(0, math.rad(n), 0)
+	part3.CFrame = CFrame.new(100, 2 + math.sin(os.clock()), 0) * CFrame.Angles(0, math.rad(n), 0)
 	task.wait()
 end
