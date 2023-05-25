@@ -1,6 +1,6 @@
 local HttpService = game:GetService("HttpService")
 local lib = loadstring(HttpService:GetAsync("https://github.com/BRY402/random-scripts/raw/main/stuff/lib.lua",true))()
-local radius = 5
+local radius = 7
 local volume = (4 / math.pi) * math.pi * (radius ^ 3)
 local blockSize = 1
 local mainPart = lib.Create("Part",script,{Anchored = true,
@@ -22,13 +22,13 @@ for x = -radius, radius, blockSize do
 						for z = -radius, radius, blockSize do
 							local distance = math.sqrt(x ^ 2 + y ^ 2 + z ^ 2)
 							if distance <= radius and distance >= radius / (4 / math.pi) then
-								local block = lib.Create("BoxHandleAdornment",script,{
+								local block = lib.Create("ConeHandleAdornment",script,{
 									Adornee = mainPart,
-									Size = Vector3.new(blockSize,blockSize,blockSize),
-									CFrame = CFrame.new(x,y,z),
+									--Size = Vector3.new(blockSize,blockSize,blockSize),
+									CFrame = CFrame.lookAt(Vector3.new(x, y, z), Vector3.new(x, y, z) * 2),
 									Color3 = Color3.new(x / radius, y / radius, z / radius)
 								})
-								table.insert(blocks, {
+							table.insert(blocks, {
 									Block = block,
 									X = x,
 									Y = y,
@@ -47,5 +47,5 @@ for x = -radius, radius, blockSize do
 	end
 end
 lib.Loops.forever(function()
-	mainPart.Orientation = Vector3.new(0,(os.clock() % 360) * radius,0)
+	mainPart.Orientation = Vector3.new(0,(os.clock() % 360) * radius, 0)
 end)
