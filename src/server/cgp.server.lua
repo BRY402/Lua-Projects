@@ -54,10 +54,12 @@ function Physics:Update()
 			gui:SetAttribute("Velocity", UDim2.new(0, velocity.X.Offset, 0, -y.Offset / 2))
 		end
 		if inbounds3 and inbounds4 then
-			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, 0, 0, 0))
+			local x = velocity.X
+			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, -x.Offset / 2, 0, 0))
 		else
 			local x = velocity.X
-			gui:SetAttribute("Velocity", UDim2.new(0, -x.Offset / 2, 0, velocity.Y.Offset))
+			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 1 or x.Offset > 0 and x.Offset - 1
+			gui:SetAttribute("Velocity", UDim2.new(0, x.Offset - 1, 0, velocity.Y.Offset))
 		end
 		gui.Position = gui.Position + gui:GetAttribute("Velocity")
 		if i % 10 == 0 then
@@ -67,7 +69,7 @@ function Physics:Update()
 	return took
 end
 local block = obj.new()
-block:SetAttribute("Velocity", UDim2.new(0, 10, 0, 0))
+block:SetAttribute("Velocity", UDim2.new(0, 50, 0, 0))
 while true do
 	task.wait()
 	Physics:Update()
