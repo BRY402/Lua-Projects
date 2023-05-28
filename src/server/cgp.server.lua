@@ -42,7 +42,7 @@ function Physics:Update()
 	for i, gui in pairs(Objects) do
 		local velocity = gui:GetAttribute("Velocity")
 		local x, y, sizeX, sizeY = gui.Position.X, gui.Position.Y, gui.Size.X, gui.Size.Y
-		local inbounds1, inbounds2, inbounds3, inbounds4 = y.Offset < Y - (sizeY.Offset + velocity.Y.Offset), y.Offset > -Y + (sizeY.Offset + velocity.Y.Offset), x.Offset < X - (sizeX.Offset + velocity.X.Offset), x.Offset > -X + (sizeX.Offset + velocity.X.Offset)
+		local inbounds1, inbounds2, inbounds3, inbounds4 = y.Offset < Y - (sizeY.Offset + velocity.Y.Offset), -y.Offset > -Y + (sizeY.Offset + velocity.Y.Offset), x.Offset < X - (sizeX.Offset + velocity.X.Offset), -x.Offset > -X + (sizeX.Offset + velocity.X.Offset)
 		if inbounds1 and inbounds2 then
 			gui:SetAttribute("Velocity", velocity + UDim2.new(0, 0, 0, Physics.Gravity))
 			gui.Position = gui.Position + gui:GetAttribute("Velocity")
