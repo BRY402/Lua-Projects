@@ -11,7 +11,7 @@ local window = lib.Create("Part", script, {
 	Material = "SmoothPlastic",
 	CanCollide = false,
 	Color = Color3.new(0,0,0),
-	CFrame = owner.Character.HumanoidRootPart.CFrame
+	CFrame = owner.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
 })
 local gui = lib.Create("SurfaceGui", window, {
 	Name = "Gui",
@@ -50,16 +50,21 @@ function Physics:Update()
 		if inbounds1 and inbounds2 then
 			gui:SetAttribute("Velocity", velocity + UDim2.new(0, 0, 0, Physics.Gravity))
 		else
+			local velocity = gui:GetAttribute("Velocity")
 			local y = velocity.Y
 			gui:SetAttribute("Velocity", UDim2.new(0, velocity.X.Offset, 0, -y.Offset / 2))
 		end
 		if inbounds3 and inbounds4 then
+			local velocity = gui:GetAttribute("Velocity")
 			local x = velocity.X
-			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, -x.Offset / 2, 0, 0))
+			local x = x.Offset == 0 and 0 or x.Offset < 0 and 1 or x.Offset > 0 and -1
+			gui:SetAttribute("Velocity", velocity + UDim2.new(0, x / 2, 0, 0))
 		else
+			local velocity = gui:GetAttribute("Velocity")
 			local x = velocity.X
-			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 1 or x.Offset > 0 and x.Offset - 1
-			gui:SetAttribute("Velocity", UDim2.new(0, x.Offset - 1, 0, velocity.Y.Offset))
+			local y = velocity.Y
+			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 2.5 or x.Offset > 0 and x.Offset - 2.5
+			gui:SetAttribute("Velocity", UDim2.new(0, -x, 0, y.Offset))
 		end
 		gui.Position = gui.Position + gui:GetAttribute("Velocity")
 		if i % 10 == 0 then
@@ -69,7 +74,7 @@ function Physics:Update()
 	return took
 end
 local block = obj.new()
-block:SetAttribute("Velocity", UDim2.new(0, 50, 0, 0))
+block:SetAttribute("Velocity", UDim2.new(0, 1000, 0, 0))
 while true do
 	task.wait()
 	Physics:Update()
