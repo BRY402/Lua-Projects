@@ -34,19 +34,25 @@ end}
 local Physics = {Gravity = 1}
 function Physics:Update()
 	local newtime = os.clock()
-	local lag = newtime - time
+	local took = newtime - time
 	time = newtime
 	for i, gui in pairs(Objects) do
+		local lastGui = i > 1 and Objects[i] or nil
 		local x, y, sizeX, sizeY = gui.Position.X, gui.Position.Y, gui.Size.X, gui.Size.Y
-		local inbounds1, inbounds2, inbounds3, inbounds4 = y.Offset < Y - sizeY.Offset, y.Offset > -Y + sizeY.Offset, x.Offset < X - sizeX.Offset, X.Offset > -X + sizeX.Offset
+		local inbounds1, inbounds2, inbounds3, inbounds4 = y.Offset < Y - sizeY.Offset, y.Offset > -Y + sizeY.Offset, x.Offset < X - sizeX.Offset, x.Offset > -X + sizeX.Offset
 		if inbounds1 and inbounds2 and inbounds3 and inbounds4 then
-			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, 0, 0, -Physics.Gravity))
+			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, 0, 0, Physics.Gravity))
 			gui.Position = gui.Position + gui:GetAttribute("Velocity")
 		else
 			local vel = gui:GetAttribute("Velocity").Y
-			gui:SetAttribute("Velocity", UDim2.new(0, 0, 0, -vel / 2))
+			gui:SetAttribute("Velocity", UDim2.new(0, 0, 0, -vel.Offset))
+			gui.Position = gui.Position + gui:GetAttribute("Velocity")
+		end
+		if i % 10 == 0 then
+			task.wait()
 		end
 	end
+	return took
 end
 Obj.new()
 while true do
