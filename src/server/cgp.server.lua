@@ -63,7 +63,7 @@ function Physics:Update()
 			local velocity = gui:GetAttribute("Velocity")
 			local x = velocity.X
 			local y = velocity.Y
-			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 2.5 or x.Offset > 0 and x.Offset - 2.5
+			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 5 or x.Offset > 0 and x.Offset - 5
 			gui:SetAttribute("Velocity", UDim2.new(0, -x, 0, y.Offset))
 		end
 		gui.Position = gui.Position + gui:GetAttribute("Velocity")
