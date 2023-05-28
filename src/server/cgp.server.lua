@@ -43,8 +43,8 @@ function Physics:Update()
 			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, 0, 0, -Physics.Gravity))
 			gui.Position = gui.Position + gui:GetAttribute("Velocity")
 		else
-			--local vel = gui:GetAttribute("Velocity").Y
-			gui:SetAttribute("Velocity", UDim2.new(0, 0, 0, 0))
+			local vel = gui:GetAttribute("Velocity").Y
+			gui:SetAttribute("Velocity", UDim2.new(0, 0, 0, -vel / 2))
 		end
 	end
 end
