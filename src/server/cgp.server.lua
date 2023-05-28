@@ -23,7 +23,7 @@ local obj = {
 	new = function()
 		gui.Parent = owner
 		local newgui = lib.Create("Frame", gui, {
-			Size = UDim2.new(0,100,0,75),
+			Size = UDim2.new(0, 100, 0, 75),
 			BorderSizePixel = 0,
 			Position = UDim2.new(0, 0, 0, 0)
 		})
@@ -54,7 +54,7 @@ function Physics:Update()
 			gui:SetAttribute("Velocity", UDim2.new(0, velocity.X.Offset, 0, -y.Offset / 2))
 		end
 		if inbounds3 and inbounds4 then
-			gui:SetAttribute("Velocity", velocity + UDim2.new(0, 0, 0, 0))
+			gui:SetAttribute("Velocity", gui:GetAttribute("Velocity") + UDim2.new(0, 0, 0, 0))
 		else
 			local x = velocity.X
 			gui:SetAttribute("Velocity", UDim2.new(0, -x.Offset / 2, 0, velocity.Y.Offset))
@@ -67,7 +67,7 @@ function Physics:Update()
 	return took
 end
 local block = obj.new()
-block:SetAttribute("Velocity", UDim2.new(0, 25, 0, 0))
+block:SetAttribute("Velocity", UDim2.new(0, 10, 0, 0))
 while true do
 	task.wait()
 	Physics:Update()
