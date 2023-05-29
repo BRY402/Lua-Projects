@@ -57,6 +57,7 @@ function Physics:Update()
 		if inbounds3 and inbounds4 then
 			local velocity = gui:GetAttribute("Velocity")
 			local x = velocity.X
+			local y = velocity.Y
 			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 1 or x.Offset > 0 and x.Offset - 1
 			gui:SetAttribute("Velocity", UDim2.new(0, x, 0, y.Offset))
 		else
