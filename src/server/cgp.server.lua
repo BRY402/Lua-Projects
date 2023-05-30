@@ -51,8 +51,10 @@ function Physics:Update()
 			gui:SetAttribute("Velocity", velocity + UDim2.new(0, 0, 0, Physics.Gravity))
 		else
 			local velocity = gui:GetAttribute("Velocity")
+			local x = velocity.X
 			local y = velocity.Y
-			gui:SetAttribute("Velocity", UDim2.new(0, velocity.X.Offset, 0, -y.Offset / 2))
+			local y = y.Offset == 0 and 0 or y.Offset < 0 and y.Offset + 1 or y.Offset > 0 and y.Offset - 1
+			gui:SetAttribute("Velocity", UDim2.new(0, x.Offset, 0, -y.Offset))
 		end
 		if inbounds3 and inbounds4 then
 			local velocity = gui:GetAttribute("Velocity")
@@ -65,7 +67,7 @@ function Physics:Update()
 			local x = velocity.X
 			local y = velocity.Y
 			local x = x.Offset == 0 and 0 or x.Offset < 0 and x.Offset + 1 or x.Offset > 0 and x.Offset - 1
-			gui:SetAttribute("Velocity", UDim2.new(0, x, 0, y.Offset))
+			gui:SetAttribute("Velocity", UDim2.new(0, -x, 0, y.Offset))
 		end
 		gui.Position = gui.Position + gui:GetAttribute("Velocity")
 		if i % 10 == 0 then
