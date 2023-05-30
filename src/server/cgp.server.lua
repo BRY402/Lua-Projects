@@ -54,7 +54,7 @@ function Physics:Update()
 			local x = velocity.X
 			local y = velocity.Y
 			local y = y.Offset == 0 and 0 or y.Offset < 0 and y.Offset + 1 or y.Offset > 0 and y.Offset - 1
-			gui:SetAttribute("Velocity", UDim2.new(0, x.Offset, 0, -y.Offset))
+			gui:SetAttribute("Velocity", UDim2.new(0, x.Offset, 0, -y))
 		end
 		if inbounds3 and inbounds4 then
 			local velocity = gui:GetAttribute("Velocity")
@@ -77,7 +77,7 @@ function Physics:Update()
 	return took
 end
 local block = obj.new()
-block:SetAttribute("Velocity", UDim2.new(0, 1000, 0, 0))
+block:SetAttribute("Velocity", UDim2.new(0, 250, 0, 0))
 while true do
 	task.wait()
 	Physics:Update()
