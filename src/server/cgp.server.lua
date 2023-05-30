@@ -77,7 +77,7 @@ function Physics:Update()
 	return took
 end
 local block = obj.new()
-block:SetAttribute("Velocity", UDim2.new(0, 250, 0, 0))
+block:SetAttribute("Velocity", UDim2.new(0, 100, 0, 0))
 while true do
 	task.wait()
 	Physics:Update()
