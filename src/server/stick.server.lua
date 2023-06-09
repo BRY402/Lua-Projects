@@ -10,7 +10,7 @@ RunService.PreSimulation:Connect(function(delta)
 	local Camera = workspace.CurrentCamera
 	if Character then
 		local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
-		local Humanoid = Character:FindFirstChildOfClass("Humanoid)
+		local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 		if HumanoidRootPart and Humanoid then
 			if not Humanoid.SeatPart then
 				if lastPart then
