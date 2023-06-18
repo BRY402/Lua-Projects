@@ -86,6 +86,7 @@ end
 ChatMessage("Hello, my name is Cob.")
 --Vb2wFaDMnH22st9dvhcyA7q3UFbQ4gEZ", "V0"
 local bot = carter.new("518b1857-c5a9-41e7-8bf7-f428776c5cab", "V1")
+--Shadow: 8afdbc57-c664-46be-8d65-13220b3a925c
 local function Chatted(msg, plr)
 	local PlayerChar = plr.Character
 	if PlayerChar then
@@ -101,7 +102,7 @@ local function Chatted(msg, plr)
 							target = nil
 							ChatMessage(goodbies[math.random(1,#goodbies)])
 						else
-							ChatMessage(bot:Send("["..plr.Name.."]: "..msg))
+							ChatMessage(bot:Send("["..plr.Name.."]: "..msg, plr))
 						end
 					end
 				end
