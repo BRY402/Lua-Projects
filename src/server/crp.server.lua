@@ -13,7 +13,52 @@ local Physics = {
 	Gravity = DEFAULT_GRAVITY,
 	subSteps = 1
 }
-local Objects = {}
+local Simulation = {
+	MaxSimulationX = 100,
+	MaxSimulationY = 100,
+	MaxSimulationZ = 100,
+	Cells = {}
+function Simulation:CheckCellColliding(cell1, cell2)
+
+end
+function Simulation:FindCollisions()
+	for x = 1, Simulation.MaxSimulationX do
+		if not Simulation.Cells[x] then
+			Simulation.Cells[x] = {}
+		end
+		if x % 10 == 0 then
+			task.wait()
+		end
+		for y = 1, Simulation.MaxSimulationY do
+			if not Simulation.Cells[x][y] then
+				Simulation.Cells[x][y] = {}
+			end
+			if y % 10 == 0 then
+				task.wait()
+			end
+			for z = 1, Simulation.MaxSimulationZ do
+				if not Simulation.Cells[x][y][z] then
+					Simulation.Cells[x][y][z] = {Objects = {}}
+				end
+				if z % 10 == 0 then
+					task.wait()
+				end
+				local cell = Simulation.Cells[x][y][z]
+				for dx = -1, 1 do
+					for dy = -1, 1 do
+						for dz = -1, 1 do
+							local cell2 = Simulation.Cells[x + dx][y + dy][z + dz]
+							if cell2 and cell2 ~= cell then
+
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+end
 local RawObj = {new = function()
 	local instance = lib.Create("BoxHandleAdornment", PART_VisualHandler)
 	instance = Vector3.one
@@ -26,6 +71,32 @@ local RawObj = {new = function()
 	function object:Update(deltaTime)
 		object:UpdateGravity()
 		object:UpdatePosition(deltaTime)
+		local lastPosition = object.LastPosition
+		local position = object.Position
+		if Simulation.Cells[lastPosition.X] then
+			local x = Simulation.Cells[lastPosition.X]
+			if x[lastPosition.Y] then
+				local y = x[lastPosition.Y]
+				if y[lastPosition.Z] then
+					local z = y[lastPosition.Z]
+					table.remove(z.Objects, table.find(z.Objects, object))
+				end
+			end
+		end
+		if not Simulation.Cells[position.X] then
+			Simulation.Cells[position.X] = {}
+			local x = Simulation.Cells[position.X]
+			if not x[position.Y] then
+				x[position.Y] = {}
+				local y = x[position.Y]
+				if not y[position.Z] then
+					y[position.Z] = {}
+					local z = y[position.Z]
+					z.Objects = {}
+					table.insert(z.Objects, object)
+				end
+			end
+		end
 	end
 	function object:UpdatePosition(deltaTime)
 		instance.CFrame = CFrame.new(object.Position)
@@ -56,7 +127,7 @@ local RawObj = {new = function()
 			local offset = direction / distance
 			local delta = minimumDistance - distance
 			object.Position = object.Position + 0.5 * delta * offset
-			object2.Position = object.Position - 0.5 * delta * offset
+			object2.Position = object2.Position - 0.5 * delta * offset
 		end
 	end
 	function object:Chain(object2, targetDistance)
@@ -75,15 +146,11 @@ object.Position = Vector3.new(0, 15, 0)
 object:UpdatePosition(0)
 while true do
 	local time = task.wait()
-	for i, object in pairs(Objects) do
-		for _ = 1, Physics.subSteps do
-			local object2 = Objects[i - 1]
-			if object2 ~= object then
-				object:UpdateGravity()
-				object:CheckInBounds(6, Vector3.new(0, 10, 0))
-				object:CheckColliding()
-				object:Update(time)
-			end
-		end
-	end
+	
+	--[[for _ = 1, Physics.subSteps do
+		object:UpdateGravity()
+		object:CheckInBounds(6, Vector3.new(0, 10, 0))
+		object:CheckColliding()
+		object:Update(time)
+	end]]
 end
