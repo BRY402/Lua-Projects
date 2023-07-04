@@ -59,16 +59,14 @@ local RawObj = {new = function()
 			object2.Position = object.Position - 0.5 * delta * offset
 		end
 	end
-	function object:Chain(targetDistance)
+	function object:Chain(object2, targetDistance)
+		local targetDistance = targetDistance or (object.Radius + object2.Radius) / 2
 		local direction = (object.Position - object2.Position)
 		local distance = direction.Magnitude
-		local minimumDistance = object.Radius + object2.Radius
-		if distance < minimumDistance then
-			local offset = targetDistance / distance
-			local delta = minimumDistance - distance
-			object.Position = object.Position + 0.5 * delta * offset
-			object2.Position = object2.Position - 0.5 * delta * offset
-		end
+		local offset = direction / distance
+		local delta = targetDistance - distance
+		object.Position = object.Position + 0.5 * delta * offset
+		object2.Position = object2.Position - 0.5 * delta * offset
 	end
 	return object
 end}
