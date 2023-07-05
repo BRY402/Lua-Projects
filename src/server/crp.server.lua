@@ -18,6 +18,7 @@ local Simulation = {
 	MaxSimulationY = 100,
 	MaxSimulationZ = 100,
 	Cells = {}
+}
 function Simulation:CheckCellColliding(cell1, cell2, deltaTime)
 	if cell1 ~= cell2 then
 		for i, object1 in pairs(cell1) do
