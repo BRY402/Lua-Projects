@@ -18,10 +18,17 @@ local Simulation = {
 	MaxSimulationY = 100,
 	MaxSimulationZ = 100,
 	Cells = {}
-function Simulation:CheckCellColliding(cell1, cell2)
-
+function Simulation:CheckCellColliding(cell1, cell2, deltaTime)
+	if cell1 ~= cell2 then
+		for i, object1 in pairs(cell1) do
+			for i, object2 in pairs(cell2) do
+				object1:CheckColliding(object2)
+				object1:UpdatePosition(deltaTime)
+			end
+		end
+	end
 end
-function Simulation:FindCollisions()
+function Simulation:FindCollisions(deltaTime)
 	for x = 1, Simulation.MaxSimulationX do
 		if not Simulation.Cells[x] then
 			Simulation.Cells[x] = {}
@@ -47,9 +54,9 @@ function Simulation:FindCollisions()
 				for dx = -1, 1 do
 					for dy = -1, 1 do
 						for dz = -1, 1 do
-							local cell2 = Simulation.Cells[x + dx][y + dy][z + dz]
-							if cell2 and cell2 ~= cell then
-
+							local cell2 = Simulation.Cells[math.clamp(x + dx, 1, Simulation.MaxSimulationX)][math.clamp(y + dy, 1, MaxSimulationY)][math.clamp(z + dz, 1, MaxSimulationZ)]
+							if cell ~= cell2 then
+								function Simulation:CheckCellColliding(cell, cell2, deltaTime)
 							end
 						end
 					end
