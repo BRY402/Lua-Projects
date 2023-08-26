@@ -6,16 +6,17 @@ local params = RaycastParams.new()
 params.RespectCanCollide = true
 params.FilterDescendantsInstances = {owner.Character}
 RunService.PreSimulation:Connect(function(delta)
-    local Character = owner.Character
     local Camera = workspace.CurrentCamera
     if Character then
         local HumanoidRootPart = Character:FindFirstChild("HumanoidRootPart")
         local Humanoid = Character:FindFirstChildOfClass("Humanoid")
         if HumanoidRootPart and Humanoid and not Humanoid.SeatPart then
+            local rootCFrame = HumanoidRootPart.CFrame
+            rootCFrame = rootCFrame * CFrame.new(Humanoid.MoveDirection * delta
             if lastPart then
                 local currentCFrame = lastPart.CFrame
                 local difference = currentCFrame * lastCFrame:Inverse()
-                HumanoidRootPart.CFrame = difference:ToWorldSpace(HumanoidRootPart.CFrame)
+                HumanoidRootPart.CFrame = difference:ToWorldSpace(rootCFrame)
                 if Camera then
                     Camera.CFrame = difference.Rotation:ToWorldSpace(Camera.CFrame)
                 end
