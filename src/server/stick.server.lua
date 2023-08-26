@@ -21,7 +21,7 @@ RunService.PreSimulation:Connect(function(delta)
                     Camera.CFrame = difference.Rotation:ToWorldSpace(Camera.CFrame)
                 end
             end
-            local result = workspace:Spherecast(HumanoidRootPart.Position, math.pi / 2, Vector3.new(0, -15, 0), params)
+            local result = workspace:Spherecast(HumanoidRootPart.Position, math.pi / 10, Vector3.new(0, -15, 0), params)
             if result then
                 lastPart = result.Instance
                 lastCFrame = lastPart.CFrame
