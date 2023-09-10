@@ -57,7 +57,8 @@ function Simulation:FindCollisions(deltaTime)
 						for dz = -1, 1 do
 							local cell2 = Simulation.Cells[math.clamp(x + dx, 1, Simulation.MaxSimulationX)][math.clamp(y + dy, 1, MaxSimulationY)][math.clamp(z + dz, 1, MaxSimulationZ)]
 							if cell ~= cell2 then
-								function Simulation:CheckCellColliding(cell, cell2, deltaTime)
+								--function Simulation:CheckCellColliding(cell, cell2, deltaTime)
+								Simulation:CheckCellColliding(cell, cell2, deltaTime)
 							end
 						end
 					end
@@ -65,7 +66,6 @@ function Simulation:FindCollisions(deltaTime)
 			end
 		end
 	end
-
 end
 local RawObj = {new = function()
 	local instance = lib.Create("BoxHandleAdornment", PART_VisualHandler)
