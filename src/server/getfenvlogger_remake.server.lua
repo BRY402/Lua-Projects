@@ -89,7 +89,7 @@ local function decompile(func)
 			end
 		elseif typeof(value) == "table" then
 			return setmetatable({}, {__index = function(self, index2)
-				table.insert(result ,"\n"..index..".")
+				table.insert(result, "\n"..index..".")
 				return callIndex(value, index2, true)
 			end})
 		end
