@@ -36,8 +36,8 @@ local function find(table, value)
 	end))
 end
 local function decompile(func)
-	result = {},
-	variables = {}
+	local result = {}
+	local variables = {}
 	local types = {
 		string = function(value)
 			local value = value:gsub("'", "\\'"):gsub('"', '\\"')
