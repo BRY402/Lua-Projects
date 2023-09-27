@@ -114,7 +114,7 @@ local function decompile(func)
 		return table.concat(result, "\n"), table.unpack(args)
 	end
 end
-display(decompile(function(...)
+print(decompile(function(...)
 	print(...)
 	print("b")
 end)("a"))
