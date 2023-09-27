@@ -36,10 +36,8 @@ local function find(table, value)
 	end))
 end
 local function decompile(func)
-	local storage = {
-		result = "",
-		variables = {}
-	}
+	result = {},
+	variables = {}
 	local types = {
 		string = function(value)
 			local value = value:gsub("'", "\\'"):gsub('"', '\\"')
@@ -55,7 +53,7 @@ local function decompile(func)
 		local args = lib.Utilities.Pack(...)
 		lib.Loops.read(args, function(i, v)
 			local formatvalue = types[typeof(v)]
-			local variable = find(storage.variables, v)
+			local variable = find(variables, v)
 			if variable then
 				args[i] = variable
 			elseif formatvalue then
@@ -68,12 +66,12 @@ local function decompile(func)
 	end
 	local function setVars(...)
 		local args = lib.Utilities.Pack(...)
-		local storage2 = {
+		local storage = {
 			result = "",
 			count = 0
 		}
 		lib.Loops.read(args, function(i, v)
-			storage.variables[i] = v
+			variables[i] = v
 			storage.count = storage.count + 1
 			storage.result = storage.result.."arg"..count..", "
 		end)
@@ -81,17 +79,17 @@ local function decompile(func)
 	end
 	local function callIndex(self, index, fromTable)
 		local value = rawget(self, index) or getfenv()[index]
-		if not storage.variables[index] or storage.variables[index] ~= value then
-			storage.variables[index] = value
+		if not variables[index] or variables[index] ~= value then
+			variables[index] = value
 		end
 		if typeof(value) == "function" then
 			return function(...)
-				storage.result = storage.result..(not fromTable and "\n" or "")..index.."("..getArgs(...)..")"
+				table.insert(result, (not fromTable and "\n" or "")..index.."("..getArgs(...)..")")
 				return value(...)
 			end
 		elseif typeof(value) == "table" then
 			return setmetatable({}, {__index = function(self, index2)
-				storage.result = storage.result.."\n"..index.."."
+				table.insert(result ,"\n"..index..".")
 				return callIndex(value, index2, true)
 			end})
 		end
@@ -102,14 +100,14 @@ local function decompile(func)
 			return callIndex(self, index)
 		end,
 		__call = function(func, ...)
-			storage.result = storage.result.."(function("..setVars(...)..")"
+			table.insert(result, "(function("..setVars(...)..")")
 			return func(...)
 		end
 	})
 	return function(...)
 		local args = lib.Utilities.Pack(func(...))
-		storage.result = storage.result.."\nend)("..getArgs(...)..")"
-		return storage.result, table.unpack(args)
+		table.insert(result, "\nend)("..getArgs(...)..")")
+		return table.concat(result, ""), table.unpack(args)
 	end
 end
 display(decompile(function(...)
