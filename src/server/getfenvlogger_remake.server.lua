@@ -73,7 +73,7 @@ local function decompile(func)
 		lib.Loops.read(args, function(i, v)
 			variables[i] = v
 			storage.count = storage.count + 1
-			storage.result = storage.result.."arg"..count..", "
+			storage.result = storage.result.."arg"..storage.count..", "
 		end)
 		return string.sub(storage.result, 1, #storage.result - 2)
 	end
