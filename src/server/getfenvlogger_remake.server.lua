@@ -84,12 +84,16 @@ local function decompile(func)
 		end
 		if typeof(value) == "function" then
 			return function(...)
-				table.insert(result, (not fromTable and "\n" or "")..index.."("..getArgs(...)..")")
+				if not fromTable then
+					table.insert(result, index.."("..getArgs(...)..")")
+				else
+					result[#result] = result[#result]..index.."("..getArgs(...)..")"
+				end
 				return value(...)
 			end
 		elseif typeof(value) == "table" then
 			return setmetatable({}, {__index = function(self, index2)
-				table.insert(result, "\n"..index..".")
+				table.insert(result, index..".")
 				return callIndex(value, index2, true)
 			end})
 		end
@@ -106,8 +110,8 @@ local function decompile(func)
 	})
 	return function(...)
 		local args = lib.Utilities.Pack(func(...))
-		table.insert(result, "\nend)("..getArgs(...)..")")
-		return table.concat(result, ""), table.unpack(args)
+		table.insert(result, "end)("..getArgs(...)..")")
+		return table.concat(result, "\n"), table.unpack(args)
 	end
 end
 display(decompile(function(...)
