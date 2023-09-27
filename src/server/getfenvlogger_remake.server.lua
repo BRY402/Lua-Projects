@@ -44,7 +44,7 @@ local function decompile(func)
 			return string.find(value, "\n") and "[["..value.."]]" or "'"..value.."'"
 		end,
 		Vector3 = function(value)
-			typeof(value)..".new("..tostring(value)..")"
+			return typeof(value)..".new("..tostring(value)..")"
 		end
 	}
 	types.CFrame = types.Vector3
