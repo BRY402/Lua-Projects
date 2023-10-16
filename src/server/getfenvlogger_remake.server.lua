@@ -36,17 +36,26 @@ local function find(table, value)
 	end))
 end
 local function decompile(func)
+<<<<<<< HEAD
 	local storage = {
 		result = "",
 		variables = {}
 	}
+=======
+	local result = {}
+	local variables = {}
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 	local types = {
 		string = function(value)
 			local value = value:gsub("'", "\\'"):gsub('"', '\\"')
 			return string.find(value, "\n") and "[["..value.."]]" or "'"..value.."'"
 		end,
 		Vector3 = function(value)
+<<<<<<< HEAD
 			typeof(value)..".new("..tostring(value)..")"
+=======
+			return typeof(value)..".new("..tostring(value)..")"
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 		end
 	}
 	types.CFrame = types.Vector3
@@ -55,7 +64,11 @@ local function decompile(func)
 		local args = lib.Utilities.Pack(...)
 		lib.Loops.read(args, function(i, v)
 			local formatvalue = types[typeof(v)]
+<<<<<<< HEAD
 			local variable = find(storage.variables, v)
+=======
+			local variable = find(variables, v)
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 			if variable then
 				args[i] = variable
 			elseif formatvalue then
@@ -68,30 +81,49 @@ local function decompile(func)
 	end
 	local function setVars(...)
 		local args = lib.Utilities.Pack(...)
+<<<<<<< HEAD
 		local storage2 = {
+=======
+		local storage = {
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 			result = "",
 			count = 0
 		}
 		lib.Loops.read(args, function(i, v)
+<<<<<<< HEAD
 			storage.variables[i] = v
 			storage.count = storage.count + 1
 			storage.result = storage.result.."arg"..count..", "
+=======
+			variables[i] = v
+			storage.count = storage.count + 1
+			storage.result = storage.result.."arg"..storage.count..", "
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 		end)
 		return string.sub(storage.result, 1, #storage.result - 2)
 	end
 	local function callIndex(self, index, fromTable)
 		local value = rawget(self, index) or getfenv()[index]
+<<<<<<< HEAD
 		if not storage.variables[index] or storage.variables[index] ~= value then
 			storage.variables[index] = value
+=======
+		if not variables[index] or variables[index] ~= value then
+			variables[index] = value
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 		end
 		if typeof(value) == "function" then
 			return function(...)
-				storage.result = storage.result..(not fromTable and "\n" or "")..index.."("..getArgs(...)..")"
+				if not fromTable then
+					table.insert(result, index.."("..getArgs(...)..")")
+				else
+					result[#result] = result[#result]..index.."("..getArgs(...)..")"
+				end
 				return value(...)
 			end
 		elseif typeof(value) == "table" then
 			return setmetatable({}, {__index = function(self, index2)
-				storage.result = storage.result.."\n"..index.."."
+				table.insert(result, index..".")
 				return callIndex(value, index2, true)
 			end})
 		end
@@ -102,17 +134,26 @@ local function decompile(func)
 			return callIndex(self, index)
 		end,
 		__call = function(func, ...)
+<<<<<<< HEAD
 			storage.result = storage.result.."(function("..setVars(...)..")"
+=======
+			table.insert(result, "(function("..setVars(...)..")")
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 			return func(...)
 		end
 	})
 	return function(...)
 		local args = lib.Utilities.Pack(func(...))
+<<<<<<< HEAD
 		storage.result = storage.result.."\nend)("..getArgs(...)..")"
 		return storage.result, table.unpack(args)
+=======
+		table.insert(result, "end)("..getArgs(...)..")")
+		return table.concat(result, "\n"), table.unpack(args)
+>>>>>>> c77d762dafb41c45ddc0d95432b3b560935be2fd
 	end
 end
-display(decompile(function(...)
+print(decompile(function(...)
 	print(...)
 	print("b")
 end)("a"))
